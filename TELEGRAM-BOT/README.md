@@ -1,35 +1,40 @@
-# 🤖 OpenAI Image Gen & LinkedIn Post Automation
+# 🤖 Multi-funktionaler Telegram AI Agent (Text, Voice, Bild)
 
-Dieses Projekt automatisiert die Erstellung von professionellen, recherchebasierten LinkedIn-Posts inklusive hochwertiger Infografiken. Anstatt manuell in Canva zu designen, ermöglicht dieser Workflow die Generierung von Inhalten in etwa einer Minute, was Marketing-Teams über **10 Stunden Arbeit pro Woche ersparen kann**.
+Dieser Workflow realisiert einen hochintelligenten, multimodalen Telegram-Bot, der in der Lage ist, verschiedene Medienformate zu verstehen und aktiv Aufgaben in Drittsystemen zu steuern.
 
 ![Workflow Screenshot](img/workflow-view.png)
 
 ## 🚀 Funktion
-Der Workflow übernimmt den gesamten Prozess von der Idee bis zum fertigen Post:
+Der Bot fungiert als persönlicher Assistent mit folgenden Kernkompetenzen:
 
-*   **Eingabe:** Über einen n8n Form Trigger gibt der Nutzer das Thema, die Zielgruppe und seine E-Mail-Adresse ein.
-*   **Recherche:** Ein KI-Agent nutzt **Tavily**, um das Internet nach aktuellen Fakten und Statistiken zum gewählten Thema zu durchsuchen.
-*   **Texterstellung:** Basierend auf der Recherche erstellt ein **GPT-4-Modell** einen strukturierten LinkedIn-Post mit korrekten Quellenangaben.
-*   **Bildgenerierung:** Ein spezialisierter "Image Prompt Agent" entwirft einen visuellen Befehl für die **OpenAI Image API**. Diese generiert eine Infografik mit korrektem Text-Rendering.
-*   **Datenverarbeitung:** Das als Base64-String empfangene Bild wird in binäre Daten umgewandelt und zusammen mit dem Text via Gmail versendet oder direkt auf LinkedIn gepostet.
+*   **Intelligente Input-Verarbeitung:** Ein Switch-Node erkennt automatisch den Medientyp (Text, Sprache oder Bild) und leitet die Verarbeitung ein.
+*   **Multimodalität:** 
+    *   **Voice:** Sprachnachrichten werden via **OpenAI Whisper** präzise transkribiert.
+    *   **Vision:** Bilder werden via **GPT-4 Vision** analysiert.
+    *   **Audio-Output:** Antworten können via Text-to-Speech (TTS) als Sprachnachricht zurückgegeben werden.
+*   **Tool-Integration:** Der Agent ist direkt mit dem **Google Workspace** verbunden und kann eigenständig:
+    *   E-Mails via **Gmail** versenden.
+    *   Termine im **Google Calendar** verwalten.
+    *   Daten in **Google Sheets** abfragen oder aktualisieren.
+*   **Kontext-Gedächtnis:** Dank **Window Buffer Memory** behält der Bot den Überblick über den Gesprächsverlauf innerhalb einer Session.
 
 ## 🛠 Tech-Stack
-*   **n8n:** Zentrale Automatisierungsplattform zur Orchestrierung der Workflows.
-*   **OpenAI (GPT-4 & Image API):** Intelligente Texterstellung und Generierung von Marketing-Grafiken.
-*   **Tavily Search API:** KI-gestützte Websuche für aktuelle Echtzeit-Daten.
-*   **Gmail / LinkedIn API:** Automatisierte Distribution der Inhalte.
+*   **n8n:** Orchestrierung der Logik und API-Schnittstellen.
+*   **OpenAI:** GPT-4 (Intelligence), Whisper (Speech-to-Text), Vision (Bildanalyse), TTS (Sprachausgabe).
+*   **Google Workspace:** Gmail, Sheets, Calendar Integration via OAuth2.
+*   **Telegram API:** Schnittstelle für die Nutzerinteraktion.
 
 ## ⚙️ Setup-Guide
 
-### 1. API-Konfiguration
-*   **OpenRouter/OpenAI:** Erstelle einen API-Key und hinterlege ihn in n8n, um Zugriff auf GPT-4 und die Image-Modelle zu erhalten.
-*   **Tavily:** Registriere dich bei Tavily für einen API-Key und nutze diesen im HTTP-Request-Modul zur Autorisierung der Websuche.
-*   **ID-Verifizierung:** Stelle sicher, dass dein OpenAI-Organisationskonto verifiziert ist, um die Image API ohne Einschränkungen zu nutzen.
+### 1. API & Bot Setup
+*   **Telegram:** Erstelle einen Bot über den `@BotFather` und hinterlege den API-Token in n8n.
+*   **OpenAI:** Hinterlege deinen API-Key und stelle sicher, dass multimodale Modelle (Vision/Whisper) in deinem Tier freigeschaltet sind.
+*   **Google Cloud Console:** Erstelle ein Projekt, aktiviere die APIs für Gmail, Calendar und Sheets und generiere **OAuth2-Credentials** (Client ID & Secret).
 
-### 2. n8n Workflow-Import
-1. Importiere das bereitgestellte JSON-Template (`OpenAI_Image_Gen_LinkedIn_Post.json`) in n8n.
-2. Verbinde deine Gmail- oder LinkedIn-Credentials in den entsprechenden Nodes.
-3. Stelle sicher, dass nach dem Image-API-Call das Modul **"Convert to File"** genutzt wird, um den Base64-String in eine Bilddatei umzuwandeln.
+### 2. n8n Konfiguration
+1. Importiere die `TelegramBot.json` in n8n.
+2. Konfiguriere den **System Prompt** des Agent-Nodes, um die Verhaltensweise und Tool-Nutzung zu definieren.
+3. Verbinde die Google-Nodes mit deinen OAuth-Credentials.
 
 ---
-*Entwickelt zur Demonstration von moderner Workflow-Automatisierung und KI-Integration.*
+*Dieser Workflow demonstriert die nahtlose Integration von KI-Modellen in tägliche Business-Prozesse.*
