@@ -1,10 +1,10 @@
-# 🤖 Multi-funktionaler Telegram AI Agent (Text, Voice, Bild)
+# :robot: Multi-funktionaler Telegram AI Agent (Text, Voice, Bild)
 
 Dieser Workflow realisiert einen hochintelligenten, multimodalen Telegram-Bot, der in der Lage ist, verschiedene Medienformate zu verstehen und aktiv Aufgaben in Drittsystemen zu steuern.
 
 ![Workflow Screenshot](img/workflow-view.png)
 
-## 🚀 Funktion
+## :rocket: Funktion
 Der Bot fungiert als persönlicher Assistent mit folgenden Kernkompetenzen:
 
 *   **Intelligente Input-Verarbeitung:** Ein Switch-Node erkennt automatisch den Medientyp (Text, Sprache oder Bild) und leitet die Verarbeitung ein.
@@ -18,13 +18,13 @@ Der Bot fungiert als persönlicher Assistent mit folgenden Kernkompetenzen:
     *   Daten in **Google Sheets** abfragen oder aktualisieren.
 *   **Kontext-Gedächtnis:** Dank **Window Buffer Memory** behält der Bot den Überblick über den Gesprächsverlauf innerhalb einer Session.
 
-## 🛠 Tech-Stack
+## :tools: Tech-Stack
 *   **n8n:** Orchestrierung der Logik und API-Schnittstellen.
 *   **OpenAI:** GPT-4 (Intelligence), Whisper (Speech-to-Text), Vision (Bildanalyse), TTS (Sprachausgabe).
 *   **Google Workspace:** Gmail, Sheets, Calendar Integration via OAuth2.
 *   **Telegram API:** Schnittstelle für die Nutzerinteraktion.
 
-## ⚙️ Setup-Guide
+## :gear: Setup-Guide
 
 ### 1. API & Bot Setup
 *   **Telegram:** Erstelle einen Bot über den `@BotFather` und hinterlege den API-Token in n8n.
